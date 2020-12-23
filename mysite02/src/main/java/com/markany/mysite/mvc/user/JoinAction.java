@@ -26,7 +26,7 @@ public class JoinAction implements Action {
 		userVo.setPassword(password);
 		userVo.setGender(gender);
 		
-		new UserRepository().insert(userVo);
+		//new UserRepository().insert(userVo);
 		
 		WebUtil.redirect(request, response, request.getContextPath() + "/user?a=joinsuccess");
 	}

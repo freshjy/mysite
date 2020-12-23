@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.markany.web.mvc.Action;
 import com.markany.web.util.WebUtil;
 
-public class loginformAction implements Action {
+public class LoginformAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		WebUtil.forward(request, response, "WEB-INF/views/user/loginform.jsp");
 	}
-
 }
