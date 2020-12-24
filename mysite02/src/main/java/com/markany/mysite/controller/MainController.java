@@ -32,7 +32,6 @@ public class MainController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("doGet() called");
 		
-		request.setCharacterEncoding("utf-8");
 		String actionName = request.getParameter("a");		
 
 		ActionFactory actionFactory = new MainActionFactory();

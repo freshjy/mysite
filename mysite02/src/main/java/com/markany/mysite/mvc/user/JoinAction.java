@@ -30,5 +30,4 @@ public class JoinAction implements Action {
 		
 		WebUtil.redirect(request, response, request.getContextPath() + "/user?a=joinsuccess");
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.markany.mysite.web.listener;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
@@ -9,8 +10,11 @@ import javax.servlet.ServletContextListener;
  */
 public class ContextLoadListener implements ServletContextListener {
 
-	public void contextInitialized(ServletContextEvent sce)  { 
-		System.out.println("Application Starts....");
+	public void contextInitialized(ServletContextEvent servletContextEvent)  {
+		ServletContext context = servletContextEvent.getServletContext();
+		String contextConfigLocation = context.getInitParameter("contextConfigLocation");
+		
+		System.out.println("Application Starts...."+contextConfigLocation);
 	}
    
     public void contextDestroyed(ServletContextEvent sce)  { 
