@@ -22,3 +22,4 @@ public class BoardActionFactory extends ActionFactory {
 	}
 
 }
+ 

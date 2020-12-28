@@ -25,3 +25,4 @@ public class ListAction implements Action {
 		WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 	}
 }
+ 

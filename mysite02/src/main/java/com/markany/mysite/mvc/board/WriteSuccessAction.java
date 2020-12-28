@@ -13,8 +13,6 @@ import com.markany.web.util.WebUtil;
 
 public class WriteSuccessAction implements Action {
 
-	
-	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String title = request.getParameter("title");
@@ -30,3 +28,4 @@ public class WriteSuccessAction implements Action {
 		WebUtil.forward(request, response, "/WEB-INF/views/board/list.jsp");
 	}
 }
+ 

@@ -25,7 +25,7 @@
 						<th>글쓴이</th>
 						<th>조회수</th>
 						<th>작성일</th>
-						<th>&nbsp;</th>
+						<th>&nbsp;</th> 
 					</tr>
 					
 					<c:forEach items='${list }' var='vo' varStatus='status'>

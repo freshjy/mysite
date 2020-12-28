@@ -25,7 +25,7 @@
 					<tr>
 						<td class="label">내용</td>
 						<td>
-							<div class="view-content">
+							<div class="view-content"> 
 								${vo.contents }
 							</div>
 						</td>

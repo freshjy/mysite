@@ -24,7 +24,7 @@
 							<td><input type="text" name="title" value=""></td>
 						</tr>
 						<tr>
-							<td class="label">내용</td>
+							<td class="label">내용</td> 
 							<td>
 								<textarea id="content" name="content">수정해야 할 글은 고대로 
 이렇게 textarea에 뿌려야 합니다.

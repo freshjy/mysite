@@ -133,7 +133,7 @@ public class BoardRepository {
 		
 		return vo;
 	}
-	
+	 
 	public void increaseHit(Long selectNo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
