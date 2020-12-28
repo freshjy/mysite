@@ -22,7 +22,7 @@
 			<version>1.2</version>
 		</dependency>
 	</dependencies>
-
+ 
 	<build>
 		<finalName>mysite02</finalName>
 		<resources>
