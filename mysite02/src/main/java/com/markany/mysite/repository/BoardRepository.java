@@ -90,7 +90,7 @@ public class BoardRepository {
 			
 			// 3. SQL 준비
 			String sql =
-				"select no, title, contents, hit "+
+				"select no, title, contents, user_no"+
 				" from board where no=?";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -105,11 +105,13 @@ public class BoardRepository {
 				Long no = rs.getLong(1);
 				String title = rs.getString(2);
 				String contents = rs.getString(3);
+				Long userNo = rs.getLong(4);
 			
 				vo = new BoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContents(contents);
+				vo.setUserNo(userNo);
 			}			
 			
 		} catch (SQLException e) {

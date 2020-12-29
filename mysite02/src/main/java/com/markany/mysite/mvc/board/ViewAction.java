@@ -16,10 +16,10 @@ public class ViewAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String sNo = request.getParameter("no");
-		Long no =Long.parseLong(sNo);
+		Long no =Long.parseLong(sNo);		
 		
 		BoardVo vo = new BoardRepository().findOne(no);
-		request.setAttribute("vo", vo);	
+		request.setAttribute("vo", vo);
 		
 		new BoardRepository().increaseHit(no);		
 		

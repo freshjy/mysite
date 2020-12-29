@@ -17,4 +17,5 @@ insert
 	into board	
 values(null, '다섯 번째 글', '제곧내', now(), 0, (SELECT IFNULL(MAX(group_no),0)+1 FROM board as group_no) , 1, 1, 1);
 
+-- 게시글 삭제(본인것만 지울수 있음) --
 delete from board where user_no=1;

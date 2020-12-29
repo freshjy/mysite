@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div id="container">
-		<jsp:include page="/WEB-INF/views/includes/header.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board" class="board-form">
 				<table class="tbl-ex">
@@ -33,15 +33,18 @@
 				</table>
 				<div class="bottom">
 					<a href="${pageContext.servletContext.contextPath }/board">글목록</a>
+					<c:set var="userNo" value="${vo.userNo }"/>
+					<c:if test="${sessionScope.authUser.no eq userNo }">
+						<a href="${pageContext.request.contextPath }/board?a=modify">글수정</a>
+					</c:if>
 					<c:if test="${not empty authUser }">
-					<a href="${pageContext.request.contextPath }/board?a=modify">글수정</a>
-					<a href="">댓글쓰기</a>
+						<a href="">댓글쓰기</a>
 					</c:if>
 				</div>
 			</div>
 		</div>
-		<jsp:include page="/WEB-INF/views/includes/navigation.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/includes/footer.jsp"></jsp:include>
+		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
+		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
 	</div>
 </body>
 </html>
