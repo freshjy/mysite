@@ -39,7 +39,7 @@
 						<td>${vo.userName }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regDate}</td>
-						<c:if test="${not empty authUser }">
+						<c:if test="${sessionScope.authUser.no eq vo.userNo }">
 						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
 						</c:if>
 					</tr>
