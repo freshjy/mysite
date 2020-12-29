@@ -28,7 +28,7 @@ public class BoardRepository {
 				"select b.no, b.title, b.user_no, date_format(b.reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, b.hit, u.name "+ 
 				"from board b, user u "+ 
 				"where b.user_no = u.no "+ 
-				"order by group_no desc, oder_no asc, reg_date desc";
+				"order by group_no desc, oder_no asc";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 바인딩
@@ -174,7 +174,7 @@ public class BoardRepository {
 		}
 	}
 	
-	/*
+	
 	public boolean insert(BoardVo vo) {
 		boolean result = false;
 
@@ -185,16 +185,15 @@ public class BoardRepository {
 			
 			// 3. SQL 준비
 			String sql =
-					" insert" +
-					"   into board" +
-					" values (null, ?, ?, now(), 0, , 1, 1, )";
+					" insert " +
+					"	into board " +	
+					" values(null, ?, ?, now(), 0, (SELECT IFNULL(MAX(group_no),0)+1 FROM board as group_no) , 1, 1, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			// 4. 바인딩
-//			pstmt.setString(1, vo.);
-//			pstmt.setString(2, vo.));
-//			pstmt.setString(3, vo.);
-			
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setLong(3, vo.getUserNo());
 			// 5. sql문 실행
 			int count = pstmt.executeUpdate();
 			
@@ -218,10 +217,6 @@ public class BoardRepository {
 		
 		return result;
 	}
-	*/
-	
-	
-	
 	
 	private Connection getConnection() throws SQLException{
 		Connection conn = null;

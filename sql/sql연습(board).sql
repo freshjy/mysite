@@ -13,8 +13,8 @@ select no, title, contents from board where no=10;
 update board set hit = hit+1 where no=10; 
 
 -- 게시글 등록 --
-insert	
+insert 
 	into board	
-values(null, '세 번째 글', '제곧내', now(), 0, 1, 1, 1, 1);
+values(null, '다섯 번째 글', '제곧내', now(), 0, (SELECT IFNULL(MAX(group_no),0)+1 FROM board as group_no) , 1, 1, 1);
 
 delete from board where user_no=1;

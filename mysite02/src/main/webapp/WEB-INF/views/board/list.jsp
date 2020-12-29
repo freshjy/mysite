@@ -1,7 +1,11 @@
+<%@page import="com.markany.mysite.vo.UserVo"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserVo authUser = (UserVo)session.getAttribute("authUser");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +39,8 @@
 						<td>${vo.userName }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regDate}</td>
-						<td><a href="" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
+						
 					</tr>
 					</c:forEach>
 				</table>
