@@ -24,7 +24,7 @@
 				</form>
 				<table class="tbl-ex">
 					<tr>
-						<th>번호</th>
+						<th><ion-icon name="airplane-outline"></ion-icon>번호</th>
 						<th>제목</th>
 						<th>글쓴이</th>
 						<th>조회수</th>
@@ -72,5 +72,6 @@
 		</c:import>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
 	</div>
+	<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 </body>
 </html>

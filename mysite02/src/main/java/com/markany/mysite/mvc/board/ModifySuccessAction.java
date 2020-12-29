@@ -11,15 +11,23 @@ import com.markany.mysite.vo.BoardVo;
 import com.markany.web.mvc.Action;
 import com.markany.web.util.WebUtil;
 
-public class ModifyAction implements Action {
+public class ModifySuccessAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String no = request.getParameter("no");
+		String title = request.getParameter("title");
+		String contents = request.getParameter("contents");
 		
-		BoardVo vo = new BoardRepository().findOne(Long.parseLong(no));
-		request.setAttribute("vo", vo);
-		WebUtil.forward(request, response, "/WEB-INF/views/board/modify.jsp");
+		BoardVo boardVo = new BoardVo();
+		boardVo.setNo(Long.parseLong(no));
+		boardVo.setTitle(title);
+		boardVo.setContents(contents);
+		System.out.println(boardVo);
+		
+		new BoardRepository().update(boardVo);
+		
+		WebUtil.redirect(request, response, request.getContextPath() + "/board?a=");
 	}
 
 }

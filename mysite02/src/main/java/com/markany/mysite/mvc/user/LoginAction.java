@@ -33,7 +33,6 @@ public class LoginAction implements Action {
 		/*로그인 처리*/
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", userVo);
-		System.out.println(userVo);
 		WebUtil.redirect(request, response, request.getContextPath());
 	}
 

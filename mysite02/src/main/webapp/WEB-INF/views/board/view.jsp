@@ -35,7 +35,7 @@
 					<a href="${pageContext.servletContext.contextPath }/board">글목록</a>
 					<c:set var="userNo" value="${vo.userNo }"/>
 					<c:if test="${sessionScope.authUser.no eq userNo }">
-						<a href="${pageContext.request.contextPath }/board?a=modify">글수정</a>
+						<a href='${pageContext.request.contextPath }/board?a=modify&no=${vo.no }'>글수정</a>
 					</c:if>
 					<c:if test="${not empty authUser }">
 						<a href="">댓글쓰기</a>
