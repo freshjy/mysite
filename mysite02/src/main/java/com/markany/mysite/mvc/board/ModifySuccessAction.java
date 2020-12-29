@@ -23,7 +23,6 @@ public class ModifySuccessAction implements Action {
 		boardVo.setNo(Long.parseLong(no));
 		boardVo.setTitle(title);
 		boardVo.setContents(contents);
-		System.out.println(boardVo);
 		
 		new BoardRepository().update(boardVo);
 		
