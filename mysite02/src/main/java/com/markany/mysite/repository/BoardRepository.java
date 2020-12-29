@@ -218,6 +218,49 @@ public class BoardRepository {
 		return result;
 	}
 	
+	public boolean delete(BoardVo vo) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			
+			// 3. SQL 준비
+			String sql =
+					"delete from board where no = ? and user_no = ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4. 바인딩
+			pstmt.setLong(1,vo.getNo());
+			pstmt.setLong(2, vo.getUserNo());
+			
+			// 5. sql문 실행
+			int count = pstmt.executeUpdate();
+			
+			result = count == 1;
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				// 3. 자원정리
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		
+		return result;		
+	}
+	
+	
+	
 	private Connection getConnection() throws SQLException{
 		Connection conn = null;
 		try {

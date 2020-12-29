@@ -34,7 +34,7 @@
 				<div class="bottom">
 					<a href="${pageContext.servletContext.contextPath }/board">글목록</a>
 					<c:if test="${not empty authUser }">
-					<a href="">글수정</a>
+					<a href="${pageContext.request.contextPath }/board?a=modify">글수정</a>
 					<a href="">댓글쓰기</a>
 					</c:if>
 				</div>

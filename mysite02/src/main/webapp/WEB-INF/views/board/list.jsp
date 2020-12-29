@@ -39,8 +39,9 @@
 						<td>${vo.userName }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regDate}</td>
-						<td><a href="${pageContext.request.contextPath }/board?a=delete" class="del">삭제</a></td>
-						
+						<c:if test="${not empty authUser }">
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }" class="del">삭제</a></td>
+						</c:if>
 					</tr>
 					</c:forEach>
 				</table>
