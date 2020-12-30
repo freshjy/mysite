@@ -8,7 +8,7 @@ where b.user_no = u.no
 order by group_no desc, oder_no asc, reg_date desc;
 
 -- 선택 게시글 보기 --
-select no, title, contents from board where no=10;
+select no, title, contents, user_no from board where no=10;
 -- 선택 후 조회수 증가 --
 update board set hit = hit+1 where no=10; 
 
@@ -18,4 +18,8 @@ insert
 values(null, '다섯 번째 글', '제곧내', now(), 0, (SELECT IFNULL(MAX(group_no),0)+1 FROM board as group_no) , 1, 1, 1);
 
 -- 게시글 삭제(본인것만 지울수 있음) --
-delete from board where user_no=1;
+select * from board;
+delete from board where no = 20 and user_no=1;
+
+-- 게시글 수정(본인것만 수정 가능) --
+update board set title = '난 백정엽', contents = '백정엽' where no=25;
