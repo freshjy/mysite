@@ -20,6 +20,10 @@ public class BoardActionFactory extends ActionFactory {
 			action = new ModifyAction();
 		}else if("modifysuccess".equals(actionName)) {		
 			action = new ModifySuccessAction();
+		}else if("reply".equals(actionName)) {		
+			action = new ReplyAction();
+		}else if("replysuccess".equals(actionName)) {		
+			action = new ReplySuccessAction();
 		}else {
 			action = new ListAction();
 		}

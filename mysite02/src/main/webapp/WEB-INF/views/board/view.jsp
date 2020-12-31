@@ -26,7 +26,7 @@
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content"> 
-								${vo.contents }
+								${ fn:replace(vo.contents, newLine, "<br>") }
 							</div>
 						</td>
 					</tr>
@@ -38,7 +38,7 @@
 						<a href='${pageContext.request.contextPath }/board?a=modify&no=${vo.no }'>글수정</a>
 					</c:if>
 					<c:if test="${not empty authUser }">
-						<a href="">댓글쓰기</a>
+						<a href="${pageContext.request.contextPath }/board?a=reply&	groupNo=${vo.groupNo }&orderNo=${vo.orderNo }&depth=${vo.depth }">댓글쓰기</a>
 					</c:if>
 				</div>
 			</div>

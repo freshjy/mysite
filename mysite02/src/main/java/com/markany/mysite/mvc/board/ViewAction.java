@@ -19,7 +19,6 @@ public class ViewAction implements Action {
 		
 		BoardVo vo = new BoardRepository().findOne(Long.parseLong(no));
 		request.setAttribute("vo", vo);
-		
 		new BoardRepository().increaseHit(Long.parseLong(no));		
 		
 		WebUtil.forward(request, response, "/WEB-INF/views/board/view.jsp");

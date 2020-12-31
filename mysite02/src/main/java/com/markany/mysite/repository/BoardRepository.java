@@ -25,7 +25,7 @@ public class BoardRepository {
 			
 			// 3. SQL 준비
 			String sql =
-				"select b.no, b.title, b.user_no, date_format(b.reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, b.hit, u.name "+ 
+				"select b.no, b.title, b.user_no, date_format(b.reg_date, '%Y-%m-%d %H:%i:%s') as reg_date, b.hit, b.group_no, b.oder_no, b.depth, u.name "+ 
 				"from board b, user u "+ 
 				"where b.user_no = u.no "+ 
 				"order by group_no desc, oder_no asc";
@@ -43,7 +43,10 @@ public class BoardRepository {
 				Long userNo = rs.getLong(3);
 				String regDate = rs.getString(4);
 				Long hit = rs.getLong(5);
-				String userName = rs.getString(6);
+				Long groupNo = rs.getLong(6);
+				int orderNo = rs.getInt(7);
+				int depth = rs.getInt(8);
+				String userName = rs.getString(9);
 				
 				
 				BoardVo vo = new BoardVo();
@@ -52,6 +55,9 @@ public class BoardRepository {
 				vo.setUserNo(userNo);
 				vo.setRegDate(regDate);
 				vo.setHit(hit);
+				vo.setGroupNo(groupNo);
+				vo.setOrderNo(orderNo);
+				vo.setDepth(depth);
 				vo.setUserName(userName);
 				
 				list.add(vo);
@@ -90,7 +96,7 @@ public class BoardRepository {
 			
 			// 3. SQL 준비
 			String sql =
-				"select no, title, contents, user_no"+
+				"select no, title, contents, group_no, oder_no, depth, user_no"+
 				" from board where no=?";
 			pstmt = conn.prepareStatement(sql);
 			
@@ -105,12 +111,18 @@ public class BoardRepository {
 				Long no = rs.getLong(1);
 				String title = rs.getString(2);
 				String contents = rs.getString(3);
-				Long userNo = rs.getLong(4);
+				Long groupNo = rs.getLong(4);
+				int oderNo = rs.getInt(5);
+				int depth = rs.getInt(6);
+				Long userNo = rs.getLong(7);
 			
 				vo = new BoardVo();
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContents(contents);
+				vo.setGroupNo(groupNo);
+				vo.setOrderNo(oderNo);
+				vo.setDepth(depth);
 				vo.setUserNo(userNo);
 			}			
 			
@@ -196,6 +208,51 @@ public class BoardRepository {
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setLong(3, vo.getUserNo());
+			// 5. sql문 실행
+			int count = pstmt.executeUpdate();
+			
+			result = count == 1;
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				// 3. 자원정리
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		
+		return result;
+	}
+	
+	public boolean insertReply(BoardVo vo) {
+		boolean result = false;
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			
+			// 3. SQL 준비
+			String sql =
+					"insert into board values(null, ?, ?, now(), 0, ?, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			
+			// 4. 바인딩
+			pstmt.setString(1, vo.getTitle());
+			pstmt.setString(2, vo.getContents());
+			pstmt.setLong(3, vo.getGroupNo());
+			pstmt.setInt(4, vo.getOrderNo()+1);
+			pstmt.setInt(5, vo.getDepth()+1);
+			pstmt.setLong(6, vo.getUserNo());
+			
 			// 5. sql문 실행
 			int count = pstmt.executeUpdate();
 			
