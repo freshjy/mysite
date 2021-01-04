@@ -10,11 +10,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.markany.mysite.exception.GuestbookRepositoryException;
+import com.markany.mysite.exception.UserRepositoryException;
 import com.markany.mysite.vo.GuestbookVo;
+import com.markany.mysite.vo.UserVo;
 
 @Repository
 public class GuestbookRepository {
-	public List<GuestbookVo> findAll() {
+	public List<GuestbookVo> findAll() throws GuestbookRepositoryException {
 		List<GuestbookVo> list = new ArrayList<>();
 		
 		Connection conn = null;
@@ -53,7 +56,7 @@ public class GuestbookRepository {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("error:" + e);
+			throw new GuestbookRepositoryException();
 		} finally {
 			try {
 				// 3. 자원정리
