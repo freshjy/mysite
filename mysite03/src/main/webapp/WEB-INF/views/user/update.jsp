@@ -11,25 +11,31 @@
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/includes/header.jsp"/>
+		<jsp:include page="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="user">
-				<form id="join-form" name="joinForm" method="POST" action="${pageContext.request.contextPath }/user">
-					<input type="hidden" name = 'a' value = 'UPDATE'/>
-					<label class="block-label" for="name">이름</label>
-					<input id="name" name="name" type="text" value="">
 
-					<h4>qorwjdduq@gmail.com</h4>
-					
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/update">
+					<label class="block-label" for="name">이름</label>
+					<input id="name" name="name" type="text" value="${vo.name }">
+
+					<h4 style="padding:10px 0">${vo.email }</h4>
+
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<legend>성별</legend>
-						
-						<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
-						<label>남</label> <input type="radio" name="gender" value="male">
-											
+						<c:choose>
+							<c:when test='${"female" == vo.gender }'>
+								<label>여</label> <input type="radio" name="gender" value="female" checked="checked">
+								<label>남</label> <input type="radio" name="gender" value="male">
+							</c:when>
+							<c:otherwise>
+								<label>여</label> <input type="radio" name="gender" value="female">
+								<label>남</label> <input type="radio" name="gender" value="male" checked="checked">
+							</c:otherwise>
+						</c:choose>
 					</fieldset>
 					
 					<input type="submit" value="수정하기">
@@ -37,8 +43,8 @@
 				</form>
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
-		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
+		<jsp:include page="/WEB-INF/views/includes/navigation.jsp" />
+		<jsp:include page="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>
