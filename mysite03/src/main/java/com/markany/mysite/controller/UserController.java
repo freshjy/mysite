@@ -44,7 +44,7 @@ public class UserController {
 		}
 		
 		//인증처리
-		session.setAttribute("authUser", authUser);		
+		session.setAttribute("authUser", authUser);
 		return "redirect:/";
 	}
 	

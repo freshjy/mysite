@@ -3,11 +3,11 @@ desc user;
 -- 전체회원 보기: select
 select *
 	from user;
-
+delete from user where no = 13;
 -- 회원가입 : insert
 insert	
 	into user	
-values(null, '백정엽', 'qorwjdduq@gmail.com', '1234','male', now());
+values(null, '백정엽1', 'qorwjdduq@gmail.com', '1234','male', now());
 
 -- 로그인  : select
 select no,name	

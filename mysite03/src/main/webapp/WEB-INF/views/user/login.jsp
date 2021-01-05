@@ -2,9 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String email = (String)request.getAttribute("email");	
-%>
+
 <!doctype html>
 <html>
 <head>
@@ -23,7 +21,7 @@
 					<label class="block-label" >패스워드</label>
 					<input name="password" type="password" value="">
 					<c:if test="${not empty userVo }">
-							<p>
+						<p>
 							로그인이 실패 했습니다.
 						</p>
 					</c:if>

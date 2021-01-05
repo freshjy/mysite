@@ -1,22 +1,26 @@
 package com.markany.mysite.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.markany.mysite.exception.GuestbookRepositoryException;
-import com.markany.mysite.exception.UserRepositoryException;
 import com.markany.mysite.vo.GuestbookVo;
-import com.markany.mysite.vo.UserVo;
 
 @Repository
 public class GuestbookRepository {
+
+	@Autowired
+	private DataSource dataSource;
+	
 	public List<GuestbookVo> findAll() throws GuestbookRepositoryException {
 		List<GuestbookVo> list = new ArrayList<>();
 		
@@ -25,7 +29,7 @@ public class GuestbookRepository {
 		ResultSet rs = null;
 				
 		try {
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			// 3. SQL 준비
 			String sql =
@@ -83,7 +87,7 @@ public class GuestbookRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			// 3. SQL 준비
 			String sql =
@@ -127,7 +131,7 @@ public class GuestbookRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = getConnection();
+			conn = dataSource.getConnection();
 			
 			// 3. SQL 준비
 			String sql =
@@ -163,21 +167,5 @@ public class GuestbookRepository {
 		}		
 		
 		return result;
-	}
-	
-	private Connection getConnection() throws SQLException{
-		Connection conn = null;
-		try {
-			// 1. JDBC Driver 로딩
-			Class.forName("org.mariadb.jdbc.Driver");
-			
-			// 2. 연결하기
-			String url = "jdbc:mysql://192.168.1.13:3307/webdb?characterEncoding=utf8";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		} catch (ClassNotFoundException e) {
-			System.out.println("드라이버 로딩 실패:" + e);
-		}
-		
-		return conn;
 	}
 }
