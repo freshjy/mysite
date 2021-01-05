@@ -31,14 +31,15 @@ public class GuestbookController {
 		guestbookService.writeMessage(vo);
 		return "redirect:/guestbook";
 	}
-	
-	@RequestMapping(value = "/delete/{no}", method=RequestMethod.GET)
-	public String deleteform(@PathVariable("no") Long no, Model model) {
+
+	@RequestMapping(value="/delete/{no}", method=RequestMethod.GET)
+	public String delete(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("no", no);
 		return "guestbook/delete";
 	}
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
-	public String deleteform(GuestbookVo vo) {
+
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	public String delete(GuestbookVo vo) {
 		guestbookService.deleteMessage(vo);
 		return "redirect:/guestbook";
 	}
