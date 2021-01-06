@@ -18,15 +18,13 @@ public class MyInterceptor01 implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("MyInterceptor01:preHandle(...) called");
-
+		System.out.println("MyInterceptor01:postHandle(...) called");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		System.out.println("MyInterceptor01:preHandle(...) called");
-
+		System.out.println("MyInterceptor01:afterCompletion(...) called");
 	}
 
 }
