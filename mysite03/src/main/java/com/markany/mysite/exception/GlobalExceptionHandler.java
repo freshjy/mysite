@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
-private static final Log LOGGER = LogFactory.getLog(GlobalExceptionHandler.class);
+	private static final Log LOGGER = LogFactory.getLog(GlobalExceptionHandler.class);
 	
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handleException(Exception e) throws Exception {
@@ -28,5 +28,4 @@ private static final Log LOGGER = LogFactory.getLog(GlobalExceptionHandler.class
 		
 		return mav;
 	}
-	
 }

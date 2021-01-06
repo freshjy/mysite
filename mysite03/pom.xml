@@ -28,7 +28,7 @@
 				  <groupId>commons-logging</groupId>
 				  <artifactId>commons-logging</artifactId>
 			   </exclusion>
-			</exclusions>
+			</exclusions>			
 		</dependency>
 
 		<!-- Spring Web -->
@@ -97,7 +97,7 @@
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-		
+				
 		<!-- servlet -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
