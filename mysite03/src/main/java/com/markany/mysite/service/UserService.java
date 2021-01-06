@@ -1,5 +1,7 @@
 package com.markany.mysite.service;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,9 @@ import com.markany.mysite.vo.UserVo;
 
 @Service
 public class UserService {
+	
+	private static final Log LOGGER = LogFactory.getLog(UserService.class);
+	
 	@Autowired
 	private UserRepository userRepository;
 

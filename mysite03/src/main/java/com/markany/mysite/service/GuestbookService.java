@@ -2,6 +2,8 @@ package com.markany.mysite.service;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import com.markany.mysite.vo.GuestbookVo;
 @Service
 public class GuestbookService {
 	
+	private static final Log LOGGER = LogFactory.getLog(GuestbookService.class);
+	
 	@Autowired
 	private GuestbookRepository guestbookRepository;
 
@@ -19,9 +23,9 @@ public class GuestbookService {
 	}
 
 	public void writeMessage(GuestbookVo vo) {
-		System.out.println("---->before:" + vo);
+		//System.out.println("---->before:" + vo);
 		guestbookRepository.insert(vo);
-		System.out.println("---->after:" + vo);
+		//System.out.println("---->after:" + vo);
 //		aristRepository.insert(artistVo);
 //		songVo.setArtistNo(artistNo.getNo());
 //		songRepository.insert(songVo);
