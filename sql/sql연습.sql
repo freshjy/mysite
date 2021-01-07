@@ -3,7 +3,7 @@ desc user;
 -- 전체회원 보기: select
 select *
 	from user;
-delete from user where no = 13;
+delete from user where no = 16;
 -- 회원가입 : insert
 insert	
 	into user	
@@ -24,3 +24,9 @@ where no=1;
 -- update user
 --- set
 -- where no=1;
+
+select * from user;
+
+alter table user add column role enum("USER", "ADMIN") default "USER" after gender;
+
+insert into user values(null, '관리자', 'admin@mysite.com', '1234', 'male', 'ADMIN', now());

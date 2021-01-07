@@ -49,6 +49,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		// 7. Authorization 체크(과제)
+		String role = auth.value();
+		System.out.println("----->role" + role);
 
 		return true;
 	}
