@@ -12,7 +12,6 @@ import com.markany.mysite.vo.GuestbookVo;
 
 @Service
 public class GuestbookService {
-	
 	private static final Log LOGGER = LogFactory.getLog(GuestbookService.class);
 	
 	@Autowired
@@ -23,9 +22,9 @@ public class GuestbookService {
 	}
 
 	public void writeMessage(GuestbookVo vo) {
-		//System.out.println("---->before:" + vo);
+		LOGGER.info("---->before:" + vo);
 		guestbookRepository.insert(vo);
-		//System.out.println("---->after:" + vo);
+		LOGGER.info("---->after:" + vo);
 //		aristRepository.insert(artistVo);
 //		songVo.setArtistNo(artistNo.getNo());
 //		songRepository.insert(songVo);

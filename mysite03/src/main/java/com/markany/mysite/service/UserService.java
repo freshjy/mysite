@@ -10,16 +10,15 @@ import com.markany.mysite.vo.UserVo;
 
 @Service
 public class UserService {
-	
 	private static final Log LOGGER = LogFactory.getLog(UserService.class);
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
 	public boolean join(UserVo vo) {
-		System.out.println("before--->" + vo);
+		LOGGER.info("before--->" + vo);
 		int count = userRepository.insert(vo);
-		System.out.println("after--->" + vo);
+		LOGGER.info("after--->" + vo);
 
 		return count == 1;
 	}

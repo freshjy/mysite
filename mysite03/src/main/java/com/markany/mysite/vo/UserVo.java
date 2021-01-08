@@ -1,9 +1,20 @@
 package com.markany.mysite.vo;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class UserVo {
 	private Long no;
+	
+	@NotEmpty
+	@Length(min=2, max=8)
 	private String name;
+	
+	@NotEmpty
+	@Email
 	private String email;
+	
 	private String password;
 	private String gender;
 	private String role;
@@ -32,7 +43,6 @@ public class UserVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 	public String getGender() {
 		return gender;
 	}
@@ -51,12 +61,9 @@ public class UserVo {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="
 				+ gender + ", role=" + role + ", joinDate=" + joinDate + "]";
 	}
-	
 }
