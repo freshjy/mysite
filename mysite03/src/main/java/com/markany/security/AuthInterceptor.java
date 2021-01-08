@@ -20,7 +20,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		}
 
-		// 2. casting
+		// 2. casting 
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 
 		// 3. Handler Method에 @Auth 받아오기
