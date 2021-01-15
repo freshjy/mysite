@@ -62,7 +62,7 @@
 		   <groupId>org.hibernate</groupId>
 		   <artifactId>hibernate-validator</artifactId>
 		   <version>6.1.0.Final</version>
-		</dependency>	
+		</dependency>
 
 		<!-- Spring JDBC -->
 		<dependency>
@@ -132,7 +132,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>mysite03</finalName>
+		<finalName>jblog03</finalName>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -163,7 +163,7 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://192.168.1.13:8080/manager/text</url>
-					<path>/mysite03</path>
+					<path>/jblog03</path>
 					<username>admin</username>
 					<password>manager</password>
 				</configuration>
