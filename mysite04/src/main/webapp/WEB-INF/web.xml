@@ -7,14 +7,14 @@
 	
 	<!-- Context Parameters -->
 	<context-param>
-	     <param-name>contextClass </param-name>
-	     <param-value>org.springframework.context.support.AnnotationConfigWebApplicationContext</param-value>
+	     <param-name>contextClass</param-name>
+	     <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 	</context-param>
 	<context-param>
-	     <param-name>contextConfigLocation </param-name>
+	     <param-name>contextConfigLocation</param-name>
 	     <param-value>com.markany.mysite.config.AppConfig</param-value>
 	</context-param>
-	
+
 	<!-- Context Load Listener -->	
 	<listener>
 	    <listener-class> org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -46,7 +46,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextClass</param-name>
-			<param-value>org.springframework.context.support.AnnotationConfigWebApplicationContext</param-value>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -57,9 +57,9 @@
 	<servlet-mapping>
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>	
-	
-	<!-- 공통 Error page -->	
+	</servlet-mapping>		
+
+	<!-- 공통 Error Page -->	
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>

@@ -49,7 +49,7 @@ com.markany.config.app
 com.markany.config.web
 com.markany.mysite.config
 
-com.markany.mysite.app.propeties
-com.markany.mysite.app.mybatis
-com.markany.mysite.app.mybatis.mappers
-com.markany.mysite.web.properties
+com.markany.mysite.config.app.propeties
+com.markany.mysite.config.app.mybatis
+com.markany.mysite.config.app.mybatis.mappers
+com.markany.mysite.config.web.properties

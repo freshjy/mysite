@@ -12,53 +12,54 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import com.markany.security.AuthInterceptor;
 import com.markany.security.AuthUserHandlerMethodArgumentResolver;
+import com.markany.security.LoginInterceptor;
+import com.markany.security.LogoutInterceptor;
 
 @Configuration
 @EnableWebMvc
 public class SecurityConfig extends WebMvcConfigurerAdapter {
-	// 1. Argument Resolver
+
+	//1. Argument Resolvers
+	@Bean
 	public HandlerMethodArgumentResolver authUserHandlerMethodArgumentResolver() {
 		return new AuthUserHandlerMethodArgumentResolver();
 	}
-
 	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
 		argumentResolvers.add(authUserHandlerMethodArgumentResolver());
 	}
 	
-	
-	// 2 .Interceptors
+	//2. Interceptors
 	@Bean
 	public HandlerInterceptor loginInterceptor() {
-		return new AuthInterceptor();
+		return new LoginInterceptor();
 	}
 	
 	@Bean
 	public HandlerInterceptor logoutInterceptor() {
-		return new AuthInterceptor();
+		return new LogoutInterceptor();
 	}
 	
 	@Bean
 	public HandlerInterceptor authInterceptor() {
 		return new AuthInterceptor();
 	}
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry
-				.addInterceptor(loginInterceptor())
-				.addPathPatterns("/user/auth");
+			.addInterceptor(loginInterceptor())
+			.addPathPatterns("/user/auth");
+
 		registry
-				.addInterceptor(authInterceptor())
+			.addInterceptor(logoutInterceptor())
+			.addPathPatterns("/user/logout");
+
+		registry
+			.addInterceptor(authInterceptor())
 				.addPathPatterns("/**")
 				.excludePathPatterns("/user/auth")
 				.excludePathPatterns("/user/logout")
 				.excludePathPatterns("/assets/**");
+		
 	}
-	
 }
-
-
-
-
-

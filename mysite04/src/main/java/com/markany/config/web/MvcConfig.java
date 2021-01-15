@@ -13,22 +13,19 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class MvcConfig extends WebMvcConfigurerAdapter {
 	
 	// 1. View Resolver
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/views");
-		viewResolver.setSuffix(".jsp");
+		@Bean
+		public ViewResolver viewResolver() {
+			InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+			viewResolver.setPrefix("/WEB-INF/views/");
+			viewResolver.setSuffix(".jsp");
+			return viewResolver;
+		}
+
+		// 2. Default Servlet Handler
+		@Override
+		public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+			configurer.enable();	
+		}
 		
-		return viewResolver;
-	}
-	
-	// 2. Default Servlet Handler
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
-	
-	
-	
-	// 3. Message Converters
+		// 3. Message Converters
 }
