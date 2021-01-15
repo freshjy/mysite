@@ -7,7 +7,7 @@
 		<artifactId>mysite</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>mysite03</artifactId>
+	<artifactId>mysite04</artifactId>
 	<packaging>war</packaging>
 	
 	<properties>
@@ -132,7 +132,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>mysite03</finalName>
+		<finalName>mysite04</finalName>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
@@ -163,11 +163,12 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://192.168.1.13:8080/manager/text</url>
-					<path>/mysite03</path>
+					<path>/mysite04</path>
 					<username>admin</username>
 					<password>manager</password>
 				</configuration>
 			</plugin>			
 		</plugins>
 	</build>	
+	
 </project>
