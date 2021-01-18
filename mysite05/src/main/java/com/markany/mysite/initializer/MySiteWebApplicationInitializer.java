@@ -23,7 +23,7 @@ public class MySiteWebApplicationInitializer extends AbstractAnnotationConfigDis
 	protected Class<?>[] getServletConfigClasses() {
 		// Web Application Context Config
 		return new Class<?>[] { WebConfig.class };
-	}
+	} 
 
 	@Override
 	protected String[] getServletMappings() {
