@@ -1,17 +1,80 @@
 package com.markany.mysite.config;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
+import java.util.List;
 
-import com.markany.config.web.MessageSourceConfig;
-import com.markany.config.web.MvcConfig;
-import com.markany.config.web.SecurityConfig;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.markany.security.AuthInterceptor;
+import com.markany.security.AuthUserHandlerMethodArgumentResolver;
+import com.markany.security.LoginInterceptor;
+import com.markany.security.LogoutInterceptor;
+
 
 @Configuration
-@EnableAspectJAutoProxy
-@ComponentScan({"com.markany.mysite.controller", "com.markany.mysite.exception"})
-@Import({MvcConfig.class, SecurityConfig.class, MessageSourceConfig.class})
-public class WebConfig {
+@PropertySource("classpath:config/webconfig.properties")
+public class WebConfig implements WebMvcConfigurer {
+	
+	@Autowired
+	private Environment env;
+	
+	// Argument Resolvers
+	@Bean
+	public HandlerMethodArgumentResolver authUserHandlerMethodArgumentResolver() {
+		return new AuthUserHandlerMethodArgumentResolver();
+	}
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(authUserHandlerMethodArgumentResolver());
+	}
+
+	// Interceptors
+	@Bean
+	public HandlerInterceptor loginInterceptor() {
+		return new LoginInterceptor();
+	}
+	
+	@Bean
+	public HandlerInterceptor logoutInterceptor() {
+		return new LogoutInterceptor();
+	}
+	
+	@Bean
+	public HandlerInterceptor authInterceptor() {
+		return new AuthInterceptor();
+	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry
+			.addInterceptor(loginInterceptor())
+			.addPathPatterns(env.getProperty("web.auth-url"));
+
+		registry
+			.addInterceptor(logoutInterceptor())
+			.addPathPatterns(env.getProperty("web.logout-url"));
+
+		registry
+			.addInterceptor(authInterceptor())
+				.addPathPatterns("/**")
+				.excludePathPatterns(env.getProperty("web.auth-url"))
+				.excludePathPatterns(env.getProperty("web.logout-url"))
+				.excludePathPatterns(env.getProperty("web.statics-url")  + "/**");
+	}
+	
+	// MVC Resource Mapping(URL Magic Mapping)
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry
+			.addResourceHandler(env.getProperty("resource.mapping"))
+			.addResourceLocations("file:" + env.getProperty("resource.locations"));
+	}
+	
 }

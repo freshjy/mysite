@@ -28,7 +28,7 @@
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		
-		<!-- Spring boot devtools: live reload -->
+		<!-- spring boot devtools: live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -39,19 +39,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<!-- spring boot aop starter -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		
-		<!-- Common DBCP -->
+	
+		<!-- common DBCP -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>
+		</dependency>		
 		
 		<!-- MariaDB JDBC Driver -->
 		<dependency>
@@ -65,7 +65,7 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		
+								
 		<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -86,7 +86,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
+					<artifactId>junit-vintage-engine</artifactId>					
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -124,12 +124,11 @@
 				<artifactId>tomcat-maven-plugin</artifactId>
 				<configuration>
 					<url>http://192.168.1.13:8080/manager/text</url>
-					<path>${artifactId}</path>
+					<path>/${artifactId}</path>
 					<username>admin</username>
 					<password>manager</password>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>	
-	
 </project>
