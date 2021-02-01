@@ -13,11 +13,28 @@
 	
 	<!-- auto proxy -->
 	<aop:aspectj-autoproxy />
-	
+
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
 	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+			    <property name="supportedMediaTypes">
+			        <list>
+			             <value>text/html; charset=UTF-8</value>
+			        </list>
+			    </property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+			   <property name="supportedMediaTypes">
+			       <list>
+			            <value>application/json; charset=UTF-8</value>
+			        </list>
+			   </property>
+			</bean>
+		</mvc:message-converters>
 		<mvc:argument-resolvers>
-			<bean class="com.markany.security.AuthUserHandlerMethodArgumentResolver" />
+			<bean
+				class="com.markany.security.AuthUserHandlerMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -67,6 +84,6 @@
 	</bean>
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.markany.mysite.controller, com.markany.mysite.exception" />
+	<context:component-scan base-package="com.markany.mysite.controller, com.markany.mysite.controller.api, com.markany.mysite.exception" />
 
 </beans>
