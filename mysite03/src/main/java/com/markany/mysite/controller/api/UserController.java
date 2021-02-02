@@ -3,22 +3,30 @@ package com.markany.mysite.controller.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.markany.mysite.service.UserService;
+
 @Controller("UserApiController")
 @RequestMapping("/api/user")
 public class UserController {
+	@Autowired
+	private UserService userService;
 	
 	@ResponseBody
 	@RequestMapping("/existemail")
-	public Map<String, Object> existEmail(@RequestParam(value="email", required=false, defaultValue="") String email) {
+	public Map existEmail(@RequestParam(value="email", required=false, defaultValue="") String email) {
+		
+		boolean result = userService.existsEmail(email);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("result", "success");
-		map.put("data", false);	//exist: true, not exist: false
-		map.put("message", "백정엽");
+		map.put("data", result);				// exist: true, not exist: false
+		map.put("message", "안대혁");
 		
 		return map;
 	}
