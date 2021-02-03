@@ -44,4 +44,10 @@ public class GuestbookController {
 		return "redirect:/guestbook";
 	}
 	
+	@RequestMapping(value="/spa", method=RequestMethod.GET)
+	public String indexSpa() {
+		//model.addAttribute("no", no);
+		return "guestbook/index-spa";
+	}
+	
 }

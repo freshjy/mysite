@@ -1,17 +1,15 @@
 package com.markany.mysite.controller.api;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.markany.mysite.dto.JsonResult;
 import com.markany.mysite.service.UserService;
 
-@Controller("UserApiController")
+@Controller("userApiController")
 @RequestMapping("/api/user")
 public class UserController {
 	@Autowired
@@ -19,15 +17,18 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping("/existemail")
-	public Map existEmail(@RequestParam(value="email", required=false, defaultValue="") String email) {
+	public JsonResult existEmail(@RequestParam(value="email", required=false, defaultValue="") String email) {
 		
 		boolean result = userService.existsEmail(email);
 		
-		Map<String, Object> map = new HashMap<>();
-		map.put("result", "success");
-		map.put("data", result);				// exist: true, not exist: false
-		map.put("message", "안대혁");
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("result", "success");			// "success" or "fail"
+//		map.put("data", result);				// if success, Data set (true/false)    exist: true, not exist: false
+//		map.put("message", "안대혁");				// if fail, Error Message
 		
-		return map;
+		//JsonResult jsonResult = new JsonResult()
+		//jsonResult.setResult("ok");
+		
+		return JsonResult.success(result);
 	}
 }

@@ -14,6 +14,8 @@
 		  order by reg_date desc
 		]]>	
 	</select>
+	
+	
 
 	<select id="findAllByNo" parameterType="long" resultType="guestbookvo">
 		<![CDATA[
@@ -21,10 +23,12 @@
 			  from guestbook
 		]]>	
 		<if test='_parameter > 0'>
-			 where no > #{_parameter } 
+			<![CDATA[
+			 where no < #{_parameter } 
+			 ]]>	
 		</if>	  
 		<![CDATA[
-		  order by reg_date desc
+		  order by no desc
 		     limit 0, 3
 		]]>	
 	</select>
