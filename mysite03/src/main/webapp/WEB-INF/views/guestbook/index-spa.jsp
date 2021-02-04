@@ -11,25 +11,19 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.5.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="${pageContext.request.contextPath }/assets/js/ejs/ejs.js"></script>
 <script>
 let startNo = 0;
 let isEnd = false;
-
+const listTemplate = new EJS({
+	url: '${pageContext.request.contextPath }/assets/js/ejs/list-template.ejs'
+});
+const listItemTemplate = new EJS({
+	url: '${pageContext.request.contextPath }/assets/js/ejs/list-item-template.ejs'
+});
 /* guestbook spa application */
- const render = function(vo){
-	let html = 
-		"<li data-no='" + vo.no + "'>" +
-		"<strong>" + vo.name + "</strong>" +
-		"<p>" + vo.message.replace(/\n/gi, "<br>") + "</p>" +
-		"<strong></strong>" +
-		"<a href='' data-no='" + vo.no + "'>삭제</a>" + 
-		"</li>";
-	
-	$('#list-guestbook').append(html);
-}
-
 const fetchList = function(){
-	if(isEnd){
+	if(isEnd) {
 		return;
 	}
 	$.ajax({
@@ -51,29 +45,66 @@ const fetchList = function(){
 				return;
 			}
 			
-			// rendering
-			response.data.forEach(render);
+			// rendreing
+			console.log(response);
+			const html = listTemplate.render(response);
+			$("#list-guestbook").append(html);
 			
-			//
-			//startNo = response.data[response.data.length-1]["no"];
+			
+			// startNo = response.data[response.data.length-1]["no"];
 			startNo = $('#list-guestbook li').last().data('no') || 0;
 		},
 		error: function(xhr, status, e){
 			console.log(status + ':' + e);
 		}
-	});
+	});	
 }
-
 $(function(){
 	// 버튼 이벤트(test)
 	$('#btn-fetch').click(fetchList);
+	
+	// 입력폼 submit 이벤트
+	$('#add-form').submit(function(event){
+		event.preventDefault();
+		
+		vo = {};
+		// validation
+		vo.name = $('#input-name').val();
+		vo.password = $('#input-password').val();
+		vo.message = $('#tx-message').val();
+		
+		// post
+		$.ajax({
+			url: '${pageContext.request.contextPath }/api/guestbook/add',
+			async: true,
+			type: 'post',
+			dataType: 'json',
+			data: JSON.stringify(vo),
+			contentType: 'application/json',
+			success: function(response){
+				if(response.result != 'success'){
+					console.error(response.message);
+					return;
+				}
+				
+				const html = listItemTemplate.render(response.data);
+				$('#list-guestbook').prepend(html);
+				
+				// form reset
+				$('#add-form')[0].reset();
+			},
+			error: function(xhr, status, e){
+				console.log(status + ':' + e);
+			}
+		});		
+	});
 	
 	// 창 스크롤 이벤트
 	$(window).scroll(function(){
 		const $window = $(this);
 		const $document = $(document);
 		
-		const scrollTop = $window.scrollTop();
+		const scrollTop = $window.scrollTop(); 
 		const windowHeight = $window.height();
 		const documentHeight = $document.height();
 		
@@ -82,9 +113,30 @@ $(function(){
 		}
 	});
 	
-	// 첫번째 리스트 가져오기
+	
+	// 삭제 버튼 click 이벤트
+	// Live Event: 존재하지 않는 element의 이벤트 핸들러를 미리 세팅하는 것
+	// delegation(위임, document)
+	$(document).on('click', '#list-guestbook li a', function(event){
+		event.preventDefault();
+		console.log('click');
+	});
+	
+	// 첫번쨰 리스트 가져오기
 	fetchList();
+	
+	// jQuery Plugin Test
+	$("#btn-fetch").hello();
 });
+</script>
+
+<script>
+(function($){
+	$.fn.hello = function(){
+		console.log(this.length);
+		console.log("hello #" + this.attr('title'))
+	}
+})(jQuery);
 </script>
 </head>
 <body>
@@ -96,14 +148,12 @@ $(function(){
 				<form id="add-form" action="" method="post">
 					<input type="text" id="input-name" placeholder="이름">
 					<input type="password" id="input-password" placeholder="비밀번호">
-					<textarea id="tx-content" placeholder="내용을 입력해 주세요."></textarea>
+					<textarea id="tx-message" placeholder="내용을 입력해 주세요."></textarea>
 					<input type="submit" value="보내기" />
 				</form>
-				<ul id="list-guestbook">
-					
-				</ul>
+				<ul id="list-guestbook"></ul>
 				<div style='margin:20px 0 0 0'>
-					<button id='btn-fetch'>다음가져오기</button>
+					<button id='btn-fetch' title='jQuery plugin'>다음가져오기</button>
 				</div>
 			</div>
 			<div id="dialog-delete-form" title="메세지 삭제" style="display:none">
